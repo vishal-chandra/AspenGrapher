@@ -4,6 +4,10 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.chrome.options import Options  
 import pandas as pd
 
+'''
+Logs into Follett Aspen and scrapes HTML table containing grades and course information
+(work in progress)
+'''
 #opening chrome in headless mode and going to aspen: https://duo.com/decipher/driving-headless-chrome-with-python
 chrome_options = Options()  
 chrome_options.add_argument("--headless") 
