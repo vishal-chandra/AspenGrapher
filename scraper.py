@@ -37,4 +37,12 @@ grades = pd.read_html(browser.page_source)[24]
 #close chrome
 browser.quit()
 
+blacklisted = ["Directed Study", "Health/Fitness", "Advisory"]
+
+for i in range(1, len(grades.index)):
+    for word in blacklisted:
+        if word in grades.iat[i, 2]:
+            grades.drop([i])
+            print("delete row " + str(i))
+
 print(grades)
