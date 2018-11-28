@@ -36,11 +36,9 @@ grades = pd.read_html(browser.page_source)[24]
 
 browser.quit()
 
-#delete classes which don't give grades from data table
-blacklisted = ["Directed Study", "Health/Fitness", "Advisory"]
-for index, row in grades.iterrows():
-    for word in blacklisted:
-        if word in row[2]:
-            print("drop row " + str(index) + " since " + row[2] + " matches with " + word)
-
+# delete classes which don't give grades from data table
+# concise way to do this found at https://stackoverflow.com/a/45681254 & https://stackoverflow.com/a/43399866
+grades = grades[~grades[2].str.contains('Directed Study')]
+grades = grades[~grades[2].str.contains('Health/Fitness')]
+grades = grades[~grades[2].str.contains('Advisory')]
 print(grades)
