@@ -38,10 +38,9 @@ browser.quit()
 
 #delete classes which don't give grades from data table
 blacklisted = ["Directed Study", "Health/Fitness", "Advisory"]
-for i in range(1, len(grades.index)):
+for index, row in grades.iterrows():
     for word in blacklisted:
-        if word in grades.iat[i, 2]:
-            #grades.drop([i]) (not working)
-            print("delete row " + str(i)) #debug
+        if word in row[2]:
+            print("drop row " + str(index) + " since " + row[2] + " matches with " + word)
 
 print(grades)
