@@ -1,4 +1,5 @@
 import os
+import datetime
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys  
 from selenium.webdriver.chrome.options import Options  
@@ -50,4 +51,5 @@ grades = grades[~grades[2].str.contains('Advisory')]
 columns_to_delete = [0, 1, 3, 4, 5, 6, 8, 9, 10] #everything except course name and term performance
 grades = grades.drop(columns_to_delete, axis=1)
 
-print(grades)
+csv_name = 'CSVs/' + str(datetime.datetime.now()) + '.csv'
+grades.to_csv(csv_name)
