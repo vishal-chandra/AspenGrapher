@@ -40,17 +40,48 @@ def scrape() -> pd.DataFrame:
 
     return grades
 
+def reindex(grades): 
+    
+    #generate col rename dict
+    col_rename = {}
+
+    new_col_names = ['Description', 'Term Performance']
+    col_names = list(grades)
+    for i in range(len(col_names)):
+        col_rename[col_names[i]] = new_col_names[i]
+
+    grades = grades.drop(0) #drop the first row containing description and performance as they are now col names
+    
+    #genrate row rename dict
+    row_rename = {}
+
+    row_names = list(grades.index)
+    i = 0
+    for name in row_names: 
+        row_rename[name] = i
+        i += 1
+
+    grades = grades.rename(columns=col_rename, index=row_rename)
+
+    return grades
+
+def process(grades):
+
+    # delete classes (rows) which don't give grades from data table
+    # concise way to do this found at https://stackoverflow.com/a/45681254 & https://stackoverflow.com/a/43399866
+    grades = grades[~grades[2].str.contains('Directed Study')]
+    grades = grades[~grades[2].str.contains('Health/Fitness')]
+    grades = grades[~grades[2].str.contains('Advisory')]
+
+    # same across all aspen accounts so can be hard-coded in
+    columns_to_delete = [0, 1, 3, 4, 5, 6, 8, 9, 10] #everything except course name and term performance
+    grades = grades.drop(columns_to_delete, axis=1)
+
+    return grades
+
 grades = scrape()
-# delete classes (rows) which don't give grades from data table
-# concise way to do this found at https://stackoverflow.com/a/45681254 & https://stackoverflow.com/a/43399866
-grades = grades[~grades[2].str.contains('Directed Study')]
-grades = grades[~grades[2].str.contains('Health/Fitness')]
-grades = grades[~grades[2].str.contains('Advisory')]
-
-# same across all aspen accounts so can be hard-coded in
-columns_to_delete = [0, 1, 3, 4, 5, 6, 8, 9, 10] #everything except course name and term performance
-grades = grades.drop(columns_to_delete, axis=1)
-
+grades = process(grades)
+grades = reindex(grades)
 
 csv_name = 'CSVs/' + str(datetime.datetime.now()).split('.')[0] + '.csv'
 grades.to_csv(csv_name)
