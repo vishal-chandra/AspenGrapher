@@ -7,7 +7,7 @@ grades = {}
 first_iteration = True
 for csv in os.scandir('CSVs'):
 
-    data = pd.DataFrame.from_csv(csv.path)
+    data = pd.read_csv(csv.path)
     date = csv.path.split('/')[1].split('.')[0].split(' ')[0]
     dates.append(date)
 
