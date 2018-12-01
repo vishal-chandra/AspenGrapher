@@ -85,5 +85,6 @@ grades = scrape()
 grades = process(grades)
 grades = reindex(grades)
 
-csv_name = 'CSVs/' + str(datetime.datetime.now()).split('.')[0] + '.csv'
+# name csv based only on day so that new data from the same day overwrites the old data
+csv_name = 'CSVs/' + str(datetime.datetime.now()).split('.')[0].split(' ')[0] + '.csv'
 grades.to_csv(csv_name)
