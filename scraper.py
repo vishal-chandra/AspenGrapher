@@ -40,6 +40,7 @@ def scrape() -> pd.DataFrame:
 
     return grades
 
+
 def reindex(grades): 
     
     #generate col rename dict
@@ -64,6 +65,7 @@ def reindex(grades):
     grades = grades.rename(columns=col_rename, index=row_rename)
 
     return grades
+
 
 def process(grades):
 
