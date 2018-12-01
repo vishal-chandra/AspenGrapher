@@ -13,7 +13,7 @@ def scrape() -> pd.DataFrame:
     #opening chrome in headless mode and going to aspen: https://duo.com/decipher/driving-headless-chrome-with-python
     chrome_options = Options()  
     chrome_options.add_argument("--headless") 
-    browser = webdriver.Chrome(chrome_options=chrome_options)
+    browser = webdriver.Chrome(options=chrome_options)
     browser.get('https://ma-concord.myfollett.com/aspen/logon.do')
 
     #username
@@ -52,5 +52,5 @@ columns_to_delete = [0, 1, 3, 4, 5, 6, 8, 9, 10] #everything except course name 
 grades = grades.drop(columns_to_delete, axis=1)
 
 
-csv_name = 'CSVs/' + str(datetime.datetime.now()) + '.csv'
+csv_name = 'CSVs/' + str(datetime.datetime.now()).split('.')[0] + '.csv'
 grades.to_csv(csv_name)
