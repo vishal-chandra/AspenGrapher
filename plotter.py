@@ -1,5 +1,6 @@
 import os
 import pandas as pd
+import matplotlib.pyplot as plt
 
 dates = []
 grades = {}
@@ -23,5 +24,9 @@ for csv in os.scandir('CSVs'):
             # add grade to corresponding list
             grades[row['Description']].append(row['Term Performance'].split(' ')[0])
 
-print(dates)
-print(grades)
+legend = []
+for key in grades:
+    plt.plot(dates, grades[key])
+    legend.append(key)
+plt.legend(legend, loc='upper left')
+plt.show()
