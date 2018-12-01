@@ -51,5 +51,6 @@ grades = grades[~grades[2].str.contains('Advisory')]
 columns_to_delete = [0, 1, 3, 4, 5, 6, 8, 9, 10] #everything except course name and term performance
 grades = grades.drop(columns_to_delete, axis=1)
 
+
 csv_name = 'CSVs/' + str(datetime.datetime.now()) + '.csv'
 grades.to_csv(csv_name)
