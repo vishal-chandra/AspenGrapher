@@ -1,8 +1,13 @@
 import os
+import datetime
+import re
 import pandas as pd
 import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
-import datetime
+
+# thanks to reddit user u/yawpitch for natural sort regular expression
+def natural_sort_key(value):
+    return tuple(int(s) if s.isdigit() else s for s in re.split("(\d+)",value ))
 
 def plot(test=False):
     dates = []
@@ -10,7 +15,7 @@ def plot(test=False):
 
     first_iteration = True
     #os.scandir() reads in an arbitrary order. we use sorted with a lambda function as the key to solve this
-    for csv in sorted(os.scandir("CSVs"), key=lambda e: e.name):
+    for csv in sorted(os.scandir("CSVs"), key=lambda e: natural_sort_key(e.name)):
 
         data = pd.DataFrame.from_csv(csv.path) 
 
