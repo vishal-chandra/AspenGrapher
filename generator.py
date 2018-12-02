@@ -1,7 +1,7 @@
 import pandas as pd
 import random
 
-for i in range(1, 32):
+for i in range(1, 6):
     
     courses = ['Course 1', 'Course 2', 'Course 3', 'Course 4', 'Course 5', 'Course 6']
     nums = random.sample(range(80, 100), 6)

@@ -1,8 +1,10 @@
 import os
 import pandas as pd
 import matplotlib.pyplot as plt
+import matplotlib.dates as mdates
+import datetime
 
-def plot(test):
+def plot(test=False):
     dates = []
     grades = {}
 
@@ -35,11 +37,22 @@ def plot(test):
                 else:
                     grades[row['Description']].append(row['Term Performance']) # test data has no letters
 
+    print(dates)
+    print(grades)
+
+    graph = plt.figure(figsize=(10, 5)) # create a figure with dimensions 10 x 5 inches
+    image = graph.add_subplot(111) #in the middle
+
+    #date formatting
+    dates = [datetime.datetime.strptime(d,'%m-%d').date() for d in dates]
+    graph.gca().xaxis.set_major_formatter(mdates.DateFormatter('%m-%d'))
+    graph.gca().xaxis.set_major_locator(mdates.DayLocator())
+
     legend = []
     for key in grades:
-        plt.plot(dates, grades[key])
+        image.plot(dates, grades[key])
         legend.append(key)
-    plt.legend(legend, loc='upper left')
+    image.legend(legend, loc='upper left')
     plt.show()
 
 plot(test=True)
