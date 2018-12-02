@@ -9,7 +9,8 @@ def plot(test=False):
     grades = {}
 
     first_iteration = True
-    for csv in os.scandir('CSVs'):
+    #os.scandir() reads in an arbitrary order. we use sorted with a lambda function as the key to solve this
+    for csv in sorted(os.scandir("CSVs"), key=lambda e: e.name):
 
         data = pd.DataFrame.from_csv(csv.path) 
 
