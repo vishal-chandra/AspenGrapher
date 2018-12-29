@@ -53,9 +53,6 @@ def plot(test=False):
                 else:
                     grades[row['Description']].append(row['Term Performance']) # test data has no letters
 
-    print(dates) #debug
-    print(grades) #debug
-
     graph = plt.figure(figsize=(10, 5)) # create a figure with dimensions 10 x 5 inches
     image = graph.add_subplot(111) #in the middle
 
