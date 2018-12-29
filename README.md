@@ -1,5 +1,8 @@
 # AspenGrapher
-An application to track grades posted on Follett Aspen over a period of time
+An application to track grades posted on Follett Aspen over a period of time. <br />
+* Scrapes the Aspen webpage periodically using a set of given login information to collect data. 
+* A graph can be created from the collected data at any time and stored as a png image like the one below
+<img src="gradePlot.png"  >
 
 # Install Dependencies
 1. `git clone https://github.com/vishal-chandra/AspenGrapher`
