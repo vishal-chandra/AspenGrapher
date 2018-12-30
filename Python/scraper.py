@@ -5,11 +5,12 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.chrome.options import Options  
 import pandas as pd
 
-'''
-Logs into Follett Aspen and scrapes HTML table containing grades and course information
-(work in progress)
-'''
 def scrape() -> pd.DataFrame:
+
+    """
+    Logs into Follett Aspen and scrapes HTML table containing grades and course information
+    """
+    
     #opening chrome in headless mode and going to aspen: https://duo.com/decipher/driving-headless-chrome-with-python
     chrome_options = Options()  
     chrome_options.add_argument("--headless") 
@@ -42,12 +43,19 @@ def scrape() -> pd.DataFrame:
 
 
 def reindex(grades): 
-    
+
+    """
+    Renames rows and columns of grades table
+
+    Arg:
+        grades (DataFrame): a dataframe of grades obtained using scrape() and processed using process()
+    """
     #generate col rename dict
     col_rename = {}
 
     new_col_names = ['Description', 'Term Performance']
     col_names = list(grades)
+
     for i in range(len(col_names)):
         col_rename[col_names[i]] = new_col_names[i]
 
@@ -69,7 +77,12 @@ def reindex(grades):
 
 def process(grades):
 
-    # delete classes (rows) which don't give grades from data table
+    """
+    Delete classes (rows) which don't give grades from data table
+
+    Arg:
+        grades (DataFrame): a dataframe of grades obtained using the scrape() function
+    """
     # concise way to do this found at https://stackoverflow.com/a/45681254 & https://stackoverflow.com/a/43399866
     grades = grades[~grades[2].str.contains('Directed Study')]
     grades = grades[~grades[2].str.contains('Health/Fitness')]
