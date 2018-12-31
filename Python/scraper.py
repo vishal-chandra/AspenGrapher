@@ -1,4 +1,5 @@
 import os
+import platform
 import datetime
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys  
@@ -99,6 +100,7 @@ def write(grades):
     """
     # name csv based only on day so that new data from the same day overwrites the old data
     csv_name = 'CSVs/' + str(datetime.datetime.now()).split('.')[0].split(' ')[0] + '.csv'
+    if 'Windows' in platform.platform(): csv_name.replace('/', '\\') #change to backslash if on windows
     grades.to_csv(csv_name)
 
 # scrape, process, reindex and then write the grades

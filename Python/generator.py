@@ -1,5 +1,6 @@
-import pandas as pd
+import platform
 import random
+import pandas as pd
 
 for i in range(1, 32):
     
@@ -11,4 +12,5 @@ for i in range(1, 32):
 
     # name each test datapoint with a date in december
     csv_path = 'CSVs/12-' + str(i) + '.csv'
+    if 'Windows' in platform.platform(): csv_path.replace('/', '\\') #change to backslash if on windows
     frame.to_csv(csv_path)
