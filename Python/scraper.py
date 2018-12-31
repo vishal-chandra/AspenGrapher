@@ -42,7 +42,7 @@ def reindex(grades):
     """
     Renames rows and columns of grades table
 
-    Arg:
+    Args:
         grades (DataFrame): a dataframe of grades obtained using scrape() and processed using process()
     """
     #generate col rename dict
@@ -69,13 +69,12 @@ def reindex(grades):
 
     return grades
 
-
 def process(grades):
 
     """
     Delete classes (rows) which don't give grades from data table
 
-    Arg:
+    Args:
         grades (DataFrame): a dataframe of grades obtained using the scrape() function
     """
     # concise way to do this found at https://stackoverflow.com/a/45681254 & https://stackoverflow.com/a/43399866
@@ -89,10 +88,18 @@ def process(grades):
 
     return grades
 
-grades = scrape()
-grades = process(grades)
-grades = reindex(grades)
+def write(grades):
 
-# name csv based only on day so that new data from the same day overwrites the old data
-csv_name = 'CSVs/' + str(datetime.datetime.now()).split('.')[0].split(' ')[0] + '.csv'
-grades.to_csv(csv_name)
+    """
+    Writes a dataframe of grades to a csv file named according to the data. If called more than once
+    in a day, following calls will overwrite file created by inital call.
+
+    Args:
+        grades (DataFrame): a dataframe of values
+    """
+    # name csv based only on day so that new data from the same day overwrites the old data
+    csv_name = 'CSVs/' + str(datetime.datetime.now()).split('.')[0].split(' ')[0] + '.csv'
+    grades.to_csv(csv_name)
+
+# scrape, process, reindex and then write the grades
+write(reindex(process(scrape())))
