@@ -23,7 +23,8 @@ def scrape() -> pd.DataFrame:
 
     #          ___________
     #click on | Log On -> |
-    #          ‾‾‾‾‾‾‾‾‾‾‾         
+    #          ‾‾‾‾‾‾‾‾‾‾‾      
+    print('\n __________________ \n|logging into Aspen|\n ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾ ') #login takes ~5 seconds; indicating functionality
     browser.find_element_by_id('logonButton').click()
 
     #go to academics tab
@@ -31,11 +32,10 @@ def scrape() -> pd.DataFrame:
 
     #read all tables from the html and save 25th table (contains the grades)
     grades = pd.read_html(browser.page_source)[24]
+    print(' _________________  \n|grades downloaded|\n ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾  ')
 
     browser.quit()
-
     return grades
-
 
 def reindex(grades): 
 
