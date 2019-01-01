@@ -15,7 +15,13 @@ def scrape() -> pd.DataFrame:
     #opening chrome in headless mode (no GUI) and going to aspen: https://duo.com/decipher/driving-headless-chrome-with-python
     chrome_options = Options()  
     chrome_options.add_argument("--headless") 
-    browser = webdriver.Chrome(options=chrome_options)
+
+    if 'Windows' in platform.platform():
+        driver_path = 'chromedriver\chromedriver-win.exe'
+    else:
+        driver_path = 'chromerdriver/chromedriver-mac.app'
+
+    browser = webdriver.Chrome(driver_path, options=chrome_options)
     browser.get('https://ma-concord.myfollett.com/aspen/logon.do')
 
     #username & password - values stored as bash environment variables (can be replaced with string)

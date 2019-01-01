@@ -1,5 +1,5 @@
 {
-    "python.pythonPath": "/Library/Frameworks/Python.framework/Versions/3.7/bin/python3",
+    "python.pythonPath": "C:\\Users\\visha\\AppData\\Local\\Programs\\Python\\Python36\\python.exe",
     "files.autoSave": "onWindowChange",
     "python.linting.pylintEnabled": true
 }

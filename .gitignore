@@ -28,5 +28,6 @@ Thumbs.db
 
 # Project Specific #
 ####################
+.vscode/settings.json
 gradePlot.png
 credentials.txt
