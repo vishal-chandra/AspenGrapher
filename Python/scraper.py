@@ -19,7 +19,7 @@ def scrape() -> pd.DataFrame:
     if 'Windows' in platform.platform():
         driver_path = 'chromedriver\chromedriver-win.exe'
     else:
-        driver_path = 'chromerdriver/chromedriver-mac.app'
+        driver_path = 'chromedriver/chromedriver'
 
     browser = webdriver.Chrome(driver_path, options=chrome_options)
     browser.get('https://ma-concord.myfollett.com/aspen/logon.do')
